@@ -1,25 +1,25 @@
 from collections import defaultdict
 
-# Función para calcular el conjunto first de un símbolo no terminal
+# Function to compute the FIRST set of a non-terminal symbol
 def compute_first(symbol, productions, first, visited):
     if symbol in visited:
         return first[symbol]
     
     visited.add(symbol)
     
-    if symbol not in productions:  # Si es un terminal, ya está en first
+    if symbol not in productions:  # If it's a terminal, it's already in FIRST
         first[symbol].add(symbol)
         visited.remove(symbol)
         return first[symbol]
     
     for production in productions[symbol]:
         for i, char in enumerate(production):
-            if char.isupper():  # char es un no terminal
+            if char.isupper():  # char is a non-terminal
                 char_first = compute_first(char, productions, first, visited)
                 first[symbol].update(char_first - {'e'})
                 if 'e' not in char_first:
                     break
-            else:  # char es un terminal
+            else:  # char is a terminal
                 first[symbol].add(char)
                 break
         else:
@@ -28,7 +28,7 @@ def compute_first(symbol, productions, first, visited):
     visited.remove(symbol)
     return first[symbol]
 
-# Función para calcular el conjunto first de una cadena
+# Function to compute the FIRST set of a string
 def compute_first_string(string, productions, first):
     result = set()
     for symbol in string:
@@ -44,7 +44,7 @@ def compute_first_string(string, productions, first):
     
     return result
 
-# Función para calcular el conjunto follow de un símbolo no terminal
+# Function to compute the FOLLOW set of a non-terminal symbol
 def compute_follow(symbol, productions, first, follow, start_symbol):
     if not follow[symbol]:
         follow[symbol].add('$')
@@ -61,13 +61,13 @@ def compute_follow(symbol, productions, first, follow, start_symbol):
     
     return follow[symbol]
 
-# Función principal
+# Main function
 def main():
-    # Leer la gramática desde un archivo
+    # Read the grammar from a file
     with open('grammar.txt', 'r') as file:
         grammar = file.read()
 
-    # Parsear la gramática
+    # Parse the grammar
     productions = defaultdict(list)
     for line in grammar.strip().split('\n'):
         lhs, rhs = line.split('->')
@@ -76,30 +76,30 @@ def main():
         for production in rhs_productions:
             productions[lhs].append(production.strip().split())
 
-    # Inicializar conjuntos first y follow
+    # Initialize FIRST and FOLLOW sets
     first = defaultdict(set)
     follow = defaultdict(set)
     
-    # Calcular first para todos los no terminales
+    # Compute FIRST sets for all non-terminals
     visited = set()
     for non_terminal in productions:
         compute_first(non_terminal, productions, first, visited)
     
-    # Calcular follow para todos los no terminales
+    # Compute FOLLOW sets for all non-terminals
     start_symbol = 'S'
     for non_terminal in productions:
         compute_follow(non_terminal, productions, first, follow, start_symbol)
     
-    # Guardar los conjuntos first y follow en un archivo de salida
+    # Save the FIRST and FOLLOW sets to an output file
     with open('output.txt', 'w') as output_file:
         output_file.write("First sets:\n")
         for non_terminal, first_set in sorted(first.items()):
-            if non_terminal.isupper():  # Solo imprimir no terminales
+            if non_terminal.isupper():  # Only print non-terminals
                 output_file.write(f"First({non_terminal}) = {{ {', '.join(sorted(first_set))} }}\n")
         
         output_file.write("\nFollow sets:\n")
         for non_terminal, follow_set in sorted(follow.items()):
-            if non_terminal.isupper():  # Solo imprimir no terminales
+            if non_terminal.isupper():  # Only print non-terminals
                 output_file.write(f"Follow({non_terminal}) = {{ {', '.join(sorted(follow_set))} }}\n")
 
 if __name__ == "__main__":
