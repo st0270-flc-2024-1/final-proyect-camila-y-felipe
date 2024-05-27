@@ -14,7 +14,14 @@ For running either the tests with the files in this repository, or your own defi
 - For the input we defined that the program will read a txt file which the user can edit for adding its own grammar. The form of the grammar will be as the one in the example (grammar.txt).  
 - For the output we decided to define another txt file called output.txt, being the result, the sets of First and Follow of a grammar.
 ## Implementation:
-- 
+Note: Before implementing the code it is necessary to import "defaultdict" from the "collections" module, to initialize lists or empty sets with a default value.
+Compute FIRST
+- The compute first function is implemented to compute the first set of a non-terminal symbol. If the symbol has already been visited, it returns its First sets, if it is a terminal it is added to its own First set, but if it is a non-terminal, it iterates over its productions and computes the First set. If all the symbols in the productions can be derived in epsilon, it is added to the First set.
+- The function compute_first_string is implemented to compute the First set of a string of symbols, iterating over each one. If it is a non-terminal its First set, without epsilon, is added to the result; if it is terminal it is added directly to the result; and if they all derive in epsilon then this is added as well.
+Compute FOLLOW
+- The compute_follow function is implemented to compute the Follow set of a non-terminal symbol. If the Follow set of the symbol is empty then it is initialized with "$". We iterate over the productions to find occurrences of the symbol; we compute the First set of the suffix following the symbol in the production, add the First set of the suffix to the Follow set of the symbol, not including epsilon, and if the First set of the suffix contains epsilon or the suffix is empty, we add the Follow set of the left-hand side of the production to the Follow set of the symbol.
+Grammar processing
+- The Main function is implemented to read the grammar from a txt file, calculate the First and Follow sets and save them to an output file. First e reads the grammar from a file, then we store the productions in a "defaultdict" of lists, initialize the sets First and Follow, compute for set for all non-terminals and save the sets to an output file.
 ## References:
 - Mohammad Shakirul Islam - Find First and follow of a grammar in C++ (Youtube Video, Last Updated: 2018)
 https://www.youtube.com/watch?v=sD1CdcpADgs
@@ -33,3 +40,4 @@ http://hackingoff.com/compilers/predict-first-follow-set
 - AI ChatGPT 3.5 (OpenAI) (for testing and some debbuging problems)
 - Aho, Alfred V., Monica S. Lam, Ravi Sethi and Jeffrey D. Ullman [1986] (2006). Compilers:
 Principles, Techniques, & Tools. 2nd ed. Addison-Wesley. [Section 4.4.2]
+- GeeksforGeeks. (2023, 28 febrero). Program to calculate First and Follow sets of given grammar. GeeksforGeeks. https://www.geeksforgeeks.org/program-calculate-first-follow-sets-given-grammar/
