@@ -1,0 +1,15 @@
+First sets:
+First(B) = { c }
+First(C) = { b, e }
+First(D) = { e, f, g }
+First(E) = { e, g }
+First(F) = { e, f }
+First(S) = { a }
+
+Follow sets:
+Follow(B) = { f, g, h }
+Follow(C) = { f, g, h }
+Follow(D) = { h }
+Follow(E) = { f, h }
+Follow(F) = { h }
+Follow(S) = { $ }
