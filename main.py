@@ -47,8 +47,7 @@ def compute_first_string(string, productions, first):
 # Función para calcular el conjunto follow de un símbolo no terminal
 def compute_follow(symbol, productions, first, follow, start_symbol):
     if not follow[symbol]:
-        if symbol == start_symbol:
-            follow[symbol].add('$')
+        follow[symbol].add('$')
     
         for lhs, rhs_list in productions.items():
             for rhs in rhs_list:
