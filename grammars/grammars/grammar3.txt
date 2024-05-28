@@ -1,4 +1,0 @@
-S -> A B C
-A -> a | e
-B -> b | e
-C -> c
