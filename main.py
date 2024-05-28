@@ -47,7 +47,8 @@ def compute_first_string(string, productions, first):
 # Function to compute the FOLLOW set of a non-terminal symbol
 def compute_follow(symbol, productions, first, follow, start_symbol):
     if not follow[symbol]:
-        follow[symbol].add('$')
+        if symbol == start_symbol:
+            follow[symbol].add('$')
     
         for lhs, rhs_list in productions.items():
             for rhs in rhs_list:
