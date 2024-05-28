@@ -16,10 +16,10 @@ For running either the tests with the files in this repository, or your own defi
 - For the output we decided to define another txt file called output.txt, being the result, the sets of First and Follow of a grammar.
 ## Instructions to run the tests:
 To run the unit tests follow these instructions:
-- Clone this repository or download it and each file useful for execution (main.py, grammars folder, test_grammar_parser.py and makefile).
+- Clone this repository or download it and each file useful for execution (main.py, test_grammar_parser.py and makefile).
 - Make sure you have Make download on your device.
 - Run the program with the following command from the terminal of the environment used (make), you can also run it with the following command (python3 -m unittest test_grammar_parser.py).
-- Finally you will get the results of the three grammars tested using unit tests (the three grammars that are in the grammars folder are implemented).
+- Finally you will get the results of the three grammars tested using unit tests.
 ## Implementation:
 Note: Before implementing the code it is necessary to import "defaultdict" from the "collections" module, to initialize lists or empty sets with a default value.
 - Compute FIRST
