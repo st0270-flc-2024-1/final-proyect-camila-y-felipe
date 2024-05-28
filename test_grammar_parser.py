@@ -1,8 +1,7 @@
 import unittest
-from main import *
+from main import compute_first_and_follow_sets
 
 class TestGrammarParser(unittest.TestCase):
-    
     def read_grammar(self, filename):
         with open(filename, 'r') as file:
             return file.read()
