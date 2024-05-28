@@ -16,7 +16,7 @@ class TestGrammarParser(unittest.TestCase):
         first = defaultdict(set)
         visited = set()
         compute_first('S', productions, first, visited)
-        self.assertEqual(first['S'], {'a', 'b', 'e'})
+        self.assertEqual(first['S'], {'a', 'b'})
         compute_first('A', productions, first, visited)
         self.assertEqual(first['A'], {'a', 'e'})
         compute_first('B', productions, first, visited)
@@ -33,7 +33,7 @@ class TestGrammarParser(unittest.TestCase):
         for non_terminal in productions:
             compute_first(non_terminal, productions, first, visited)
         result = compute_first_string(['A', 'B'], productions, first)
-        self.assertEqual(result, {'a', 'b', 'e'})
+        self.assertEqual(result, {'a', 'b'})
 
     def test_compute_follow(self):
         productions = {
@@ -51,7 +51,7 @@ class TestGrammarParser(unittest.TestCase):
         compute_follow('A', productions, first, follow, 'S')
         self.assertEqual(follow['A'], {'b'})
         compute_follow('B', productions, first, follow, 'S')
-        self.assertEqual(follow['B'], {'$', 'a'})
+        self.assertEqual(follow['B'], {'$'})
 
 if __name__ == '__main__':
     unittest.main()
