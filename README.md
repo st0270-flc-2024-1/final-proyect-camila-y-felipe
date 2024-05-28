@@ -4,7 +4,7 @@
 ## Version of Operating System, Compiler and tools:
 - Microsoft Windows 11 - Version 10.0.22631 Build 22631
 - Python 3.12.2
-## Instructions to run the tests
+## Instructions to run the program
 For running either the tests with the files in this repository, or your own defined files, follow these instructions:
 - Clone this repository or download it and each useful file for the execution (main.py, grammar.txt).
 - Check that you have the grammar you want to test in the grammar.txt and in the correct form.
